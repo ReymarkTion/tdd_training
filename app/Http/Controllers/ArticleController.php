@@ -24,7 +24,10 @@ class ArticleController extends Controller
     {
         $article->load('author');
 
-        return view('articles.show', compact('article'));
+        return view('articles.show', [
+            'article' => $article, 
+            'user' => auth()->user()
+        ]);
     }
 
     public function store(ArticleRequest $request)
@@ -47,4 +50,15 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.show', $article);
     }
+
+    public function toUpdate(Article $article)
+    {
+        $article->load('author');
+
+        return view('articles.toUpdate', compact('article'));
+    }
+
+
+    
+    
 }

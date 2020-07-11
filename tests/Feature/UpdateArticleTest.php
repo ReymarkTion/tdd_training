@@ -56,4 +56,5 @@ class UpdateArticleTest extends TestCase
         $this->patch("/articles/{$article->id}", $updated)
             ->assertStatus(Response::HTTP_FORBIDDEN);
     }
+
 }
