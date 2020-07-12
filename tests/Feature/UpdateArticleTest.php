@@ -38,6 +38,19 @@ class UpdateArticleTest extends TestCase
             $this->assertEquals('Changed content.', $article->content);
         });
     }
+    
+    /** @test */
+    public function author_can_see_update_article_form()
+    {
+        $user = create(User::class);
+
+        $article = create(Article::class, [
+            'user_id' => $user->id
+        ]);
+
+        $this->get("/articles/update/{$article->id}")
+            ->assertSeeText('Update Article');
+    }
 
     /** @test */
     public function author_can_only_update_his_articles()

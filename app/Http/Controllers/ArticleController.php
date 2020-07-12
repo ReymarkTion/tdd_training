@@ -22,7 +22,13 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        $article->load('author');
+        $article = Article::with(['author',
+                    'comments' => function($q) {
+                        $q->with('commenter');
+                    }])
+                    ->where('id', $article->id)
+                    ->get()
+                    ->first();
 
         return view('articles.show', [
             'article' => $article, 
@@ -57,6 +63,8 @@ class ArticleController extends Controller
 
         return view('articles.toUpdate', compact('article'));
     }
+
+
 
 
     

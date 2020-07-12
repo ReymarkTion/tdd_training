@@ -31,4 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('articles/{article}', 'ArticleController@update')->name('articles.update');
     Route::get('articles/update/{article}', 'ArticleController@toUpdate')->name('articles.toUpdate');
+
+    Route::post('comments', 'CommentsController@store')->name('comments.store');
+    Route::patch('comments/{comment}', 'CommentsController@update')->name('comments.update');
+    Route::delete('comments/{comments}', 'CommentsController@delete')->name('comments.delete');
 });
